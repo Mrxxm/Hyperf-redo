@@ -15,9 +15,16 @@ class StartCommand extends Command
         $this->setName('xxm:start')->setDescription('Start Application Server.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        echo '456';
+        $http = new \Swoole\Http\Server('0.0.0.0', 9601);
+
+        $http->on('Request', function ($request, $response) {
+            $response->header('Content-Type', 'text/html; charset=utf-8');
+            $response->end('<h1>Hello Swoole. #' . rand(1000, 9999) . '</h1>');
+        });
+
+        $http->start();
 
         return 1;
     }
