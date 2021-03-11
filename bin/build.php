@@ -9,6 +9,6 @@ require BASE_PATH . '/vendor/autoload.php'; // 通过composer完成类自动加�
 
 $application = new Application();
 
-$application->add(new \Xxm\Command\FirstCommand()); // 注册命令
+$application->add(new \Xxm\Command\StartCommand()); // 注册命令
 
 $application->run();
