@@ -2,7 +2,9 @@
 
 #### 1.启动服务
 
-`$ php bin/build.php xxm:start`
+```
+$ php bin/build.php xxm:start
+```
 
 or
 
