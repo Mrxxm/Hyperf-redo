@@ -18,6 +18,8 @@ interface ServerInterface
 
     const SERVER_BASE = 3;
 
+//    public function __construct();
+
     public function init(array $config): ServerInterface;
 
     public function start();

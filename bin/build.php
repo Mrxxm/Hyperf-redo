@@ -14,7 +14,11 @@ $config = new ConfigFactory();
 $config = $config();
 $commands = $config->get('commands');
 foreach ($commands as $command) {
-    $application->add(new $command); // 注册命令
+    if ($command === \Xxm\Command\StartCommand::class) {
+        $application->add(new \Xxm\Command\StartCommand($config));
+    } else {
+        $application->add(new $command); // 注册命令
+    }
 }
 
 $application->run();
