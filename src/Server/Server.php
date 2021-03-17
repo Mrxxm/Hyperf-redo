@@ -7,6 +7,7 @@ namespace Xxm\Server;
 use Swoole\Coroutine\Server as SwooleCoServer;
 use Swoole\Server as SwooleServer;
 use Swoole\Http\Server as SwooleHttpServer;
+use Xxm\HttpServer\Router\DispatcherFactory;
 
 class Server implements ServerInterface
 {
@@ -45,7 +46,11 @@ class Server implements ServerInterface
     {
         foreach ($callbacks as $swooleEvent => $callback) {
             [$class, $method] = $callback;
-            $instance = new $class();
+            if ($class === \Xxm\HttpServer\Server::class) {
+                $instance = new $class(new DispatcherFactory());
+            } else {
+                $instance = new $class();
+            }
             $this->server->on($swooleEvent, [$instance, $method]);
         }
     }
